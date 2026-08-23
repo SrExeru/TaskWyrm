@@ -2,8 +2,7 @@ uvicorn
 fastapi
 
 sqlalchemy
-pymysql
-aiomysql
+asyncpg
 
 python-dotenv
 pyjwt
