@@ -1,0 +1,9 @@
+uvicorn
+fastapi
+
+sqlalchemy
+pymysql
+aiomysql
+
+python-dotenv
+pyjwt
