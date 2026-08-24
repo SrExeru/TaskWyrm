@@ -1,7 +1,8 @@
 import uvicorn
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from services import session_manager, Base
+from services import session_manager
+from services.database import Base
 from models import all_models
 from routes import all_routes
 

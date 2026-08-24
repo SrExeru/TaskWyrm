@@ -1,1 +1,1 @@
-from config.env_settings import database_config
+from config.env_settings import database_config, jwt_config

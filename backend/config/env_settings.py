@@ -45,6 +45,8 @@ def optional_env_setting (key: str, value_type: type[T] = str, default: Optional
         return parse_setting(value, value_type)
     except Exception as e:
         raise RuntimeError(f'Env setting error {key}: {e}')
+    
+
 
 JWT_SECRET_KEY = required_env_setting('JWT_SECRET_KEY')
 JWT_ALGORITHM = required_env_setting('JWT_ALGORITHM')
@@ -54,4 +56,10 @@ class DBConfig:
     DATABASE_URL: str = required_env_setting('DATABASE_URL')
     DATABASE_DEBUG: bool = optional_env_setting('DATABASE_DEBUG', value_type = bool, default = False)
     
+@dataclass
+class JWTConfig:
+    JWT_SECRET_KEY: str = required_env_setting('JWT_SECRET_KEY')
+    JWT_ALGORITHM: str = required_env_setting('JWT_ALGORITHM')
+
 database_config = DBConfig()
+jwt_config = JWTConfig()
