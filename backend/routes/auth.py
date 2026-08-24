@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models import User
 from schemas import RegisterUserForm, LoginUserForm, UserResponse
 from services import session_manager, DatabaseManager
+from services.auth import get_new_session
 
 auth_router = APIRouter(
     prefix = '/auth',
@@ -12,13 +13,15 @@ auth_router = APIRouter(
 
 @auth_router.post('/register')
 async def register_user (register_form: RegisterUserForm, db: DatabaseManager = Depends(session_manager.get_session)):
-    new_user = User(**register_form.model_dump())
+    new_user = User(**register_form.model_dump(exclude = {'decive'}))
     
     await db.add(new_user)
     
-    return {
-        'id': new_user.id
-        }
+    return await get_new_session(
+        new_user.id,
+        register_form.decive,
+        db
+    )
 
 @auth_router.post('/login')
 async def login_user (login_form: LoginUserForm, db: DatabaseManager = Depends(session_manager.get_session)):
@@ -38,7 +41,11 @@ async def login_user (login_form: LoginUserForm, db: DatabaseManager = Depends(s
             detail = 'Incorrect email or password.'
         )
         
-    return UserResponse.model_validate(user)
+    return await get_new_session(
+            user.id,
+            login_form.decive,
+            db
+        )
 
 @auth_router.post('/logout')
 async def finish_session ():

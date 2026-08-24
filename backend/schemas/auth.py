@@ -7,6 +7,10 @@ class RegisterUserForm(BaseModel):
     email: str
     password: str
     
+    decive: str
+    
 class LoginUserForm(BaseModel):
     email: str
     password: str
+    
+    decive: str

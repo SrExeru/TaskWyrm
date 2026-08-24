@@ -48,6 +48,10 @@ class DatabaseManager:
         await self.session.commit()
         await self.session.refresh(entity)
         
+    async def save (self, entity: Base) -> None:
+        await self.session.commit()
+        await self.session.refresh(entity)
+        
     def select (self, model: type[ModelType]) -> QueryBuilder[ModelType]:
         return QueryBuilder(self.session, model)
         

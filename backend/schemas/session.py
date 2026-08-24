@@ -4,6 +4,7 @@ from datetime import datetime
 class TokenPayload(BaseModel):
     sub: str
     type: str
+    decive: str
     exp: datetime
     
     model_config = ConfigDict(from_attributes=True)
