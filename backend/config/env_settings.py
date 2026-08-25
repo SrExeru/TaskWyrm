@@ -63,3 +63,5 @@ class JWTConfig:
 
 database_config = DBConfig()
 jwt_config = JWTConfig()
+
+CORS_ORIGINS: list[str] = required_env_setting('CORS_ORIGINS', value_type = list)

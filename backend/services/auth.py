@@ -130,6 +130,7 @@ async def get_session (access_token: str = Depends(oauth2_scheme), db: DatabaseM
 
 
 async def get_user (access_token = Depends(oauth2_scheme), db: DatabaseManager = Depends(session_manager.get_session)) -> User:
+    print(access_token)
     payload = proccess_token(access_token)
     
     is_valid = await validate_access(

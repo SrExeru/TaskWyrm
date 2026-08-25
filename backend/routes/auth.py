@@ -25,6 +25,8 @@ async def register_user (register_form: RegisterUserForm, db: DatabaseManager = 
 
 @auth_router.post('/login')
 async def login_user (login_form: LoginUserForm, db: DatabaseManager = Depends(session_manager.get_session)):
+    print(login_form)
+    
     user = await db.select(User).where(
         User.email == login_form.email
     ).first()
