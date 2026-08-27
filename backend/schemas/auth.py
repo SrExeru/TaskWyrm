@@ -3,14 +3,14 @@ from typing import Optional
 
 class RegisterUserForm(BaseModel):
     username: str
-    biography: Optional[str]
+    biography: Optional[str] = None
     email: str
     password: str
     
-    decive: str
+    device: str
     
 class LoginUserForm(BaseModel):
     email: str
     password: str
     
-    decive: str
+    device: str

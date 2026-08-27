@@ -6,8 +6,10 @@ import { ThemeProvider } from './context/ThemeProvider.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import './App.css'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path='/' element={<HomePage />} />
+            <Route path='/register' element={<RegisterPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/dashboard' element={<DashboardPage />} />
           </Route>

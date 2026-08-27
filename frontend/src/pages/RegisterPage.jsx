@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services";
-import '../styles/LoginPage.css'
+import '../styles/RegisterPage.css'
 
-function LoginErrorMessage ({ message }) {
+function RegisterErrorMessage ({ message }) {
     if (message) {
-        return <p id="login_error">{ message }</p>
+        return <p id="regiser_error">{ message }</p>
     }
-    return <p id="login_error"></p>
+    return <p id="regiser_error"></p>
 }
 
-function LoginPage () {
+function RegisterPage () {
     const navigate = useNavigate()
 
-    const [loginError, setLoginError] = useState(null);
-    const [validLogin, setValidLogin] = useState(false);
+    const [registerError, setRegisterError] = useState(null);
+    const [validRegister, setValidRegister] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,17 +22,17 @@ function LoginPage () {
         const form = e.target;
         const form_data = new FormData(form);
 
-        await api.post('/auth/login', Object.fromEntries(form_data))
+        await api.post('/auth/register', Object.fromEntries(form_data))
             .then((response) => {
                 localStorage.setItem('access_token', response.data.token);
 
-                setValidLogin(true);
+                setValidRegister(true);
             })
             .catch((error) => {
-                setLoginError(error.response?.data?.detail || 'Login error.');
+                setRegisterError(error.response?.data?.detail || 'Register error.');
             })
             .finally(() => {
-                if (validLogin) {
+                if (validRegister) {
                     navigate('/dashboard')
                 }
             });
@@ -57,9 +57,15 @@ function LoginPage () {
     return (
         <form onSubmit={ handleLogin }>
             <h1>
-                Login
+                Register
             </h1>
             <input type="hidden" name="device" value={ device }/>
+            <div className="form_question">
+                <label htmlFor="username">
+                    Username
+                </label>
+                <input type="text" name="username" id="username" required={ true }/>
+            </div>
             <div className="form_question">
                 <label htmlFor="email">
                     Email
@@ -73,11 +79,11 @@ function LoginPage () {
                 <input type="password" name="password" id="password" required={ true }/>
             </div>
 
-            <LoginErrorMessage message={ loginError } />
+            <RegisterErrorMessage message={ registerError } />
 
-            <input type="submit" value="Login" />
+            <input type="submit" value="Register" />
         </form>
     )
 }
 
-export default LoginPage;
+export default RegisterPage;

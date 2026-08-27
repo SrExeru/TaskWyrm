@@ -1,0 +1,10 @@
+{
+    "auth": {
+        "access_token_lifespan": {
+            "minutes": 15
+        },
+        "refresh_token_lifespan": {
+            "days": 30
+        }
+    }
+}

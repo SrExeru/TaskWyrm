@@ -1,0 +1,4 @@
+#register_error {
+    color: var(--color-red);
+    min-height: 5em;
+}

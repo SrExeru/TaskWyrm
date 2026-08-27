@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from models.session import Session
+    from models.projects import Project
 
 class User(Base):
     id: Mapped[int] = mapped_column(primary_key = True)
@@ -14,6 +15,7 @@ class User(Base):
     biography: Mapped[str | None] = mapped_column(Text)
     password: Mapped[str] = mapped_column(String(300))
     
+    projects: Mapped[Project] = relationship(back_populates = 'author')
     
     sessions: Mapped[list['Session']] = relationship(back_populates = 'user')
     
